@@ -1,7 +1,7 @@
 {
   "name": "assessment-for-sprint-13-api-documentation-airbnb",
   "version": "1.0.0",
-  "main": "./routes/index.js",
+  "main": "index.js",
   "directories": {
     "doc": "docs"
   },
