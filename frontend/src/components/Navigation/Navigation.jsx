@@ -10,7 +10,7 @@ function Navigation({ isLoaded }) {
 
   return (
     <ul>
-      <li>
+      <li className="font-size-xl">
         <NavLink to="/">Home</NavLink>
       </li>
       {isLoaded && (
