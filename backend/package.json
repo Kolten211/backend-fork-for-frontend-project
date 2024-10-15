@@ -10,7 +10,6 @@
     "start:development": "nodemon ./bin/www",
     "start:production": "node ./bin/www",
     "build": "node psql-setup-script.js",
-
     "data": "sqlite3 db/dev.db \".mode box\" \"select * from $TBL;\"",
     "d": "rm db/dev.db",
     "m": "npx dotenv sequelize db:migrate",
@@ -25,9 +24,11 @@
   "description": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.5.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "csurf": "^1.11.0",
+    "datauri": "^4.1.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "express-async-errors": "^3.1.1",
@@ -35,6 +36,7 @@
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "per-env": "^1.0.2",
     "pg": "^8.13.0",
     "sequelize": "^6.37.3",
