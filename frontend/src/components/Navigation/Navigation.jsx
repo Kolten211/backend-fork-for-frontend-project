@@ -11,7 +11,9 @@ function Navigation({ isLoaded }) {
   return (
     <ul>
       <li className="font-size-xl">
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/">
+          JujutsuBnB
+        </NavLink>
       </li>
       {isLoaded && (
         <li>

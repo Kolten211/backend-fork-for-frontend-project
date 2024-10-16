@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation';
 import * as sessionActions from './store/session';
+import SpotTiles from './components/SpotTiles/SpotTiles';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <h1 className="text-center">Welcome!</h1>
+      },
+      {
+        path: '/spots',
+        element: <SpotTiles />
       }
     ]
   }
