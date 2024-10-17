@@ -1,8 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body {
-    background-color: aqua;
+    background-color: #282D3F;
     height: 100vh;
 }

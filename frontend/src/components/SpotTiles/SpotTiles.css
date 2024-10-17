@@ -1,15 +1,21 @@
 .spot-tiles-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 75vh;
+    gap: 10px;
   }
-  
+  .spot-tile-link {
+    text-decoration: none;
+    color: inherit;
+  }
   .spot-tile {
-    background-color: #f8f8f8;
+    background-color: rgba(48, 102, 155);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 300px;
+    width: 200px;
     transition: transform 0.2s;
   }
   
@@ -20,6 +26,13 @@
   .spot-image {
     width: 100%;
     border-radius: 8px 8px 0 0;
+  }
+  .spot-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%,
+
   }
   
   h3 {

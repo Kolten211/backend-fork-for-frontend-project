@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle} from 'react-icons/fa';
+import { GiHamburgerMenu } from "react-icons/gi";
 import * as sessionActions from '../../store/session';
 import OpenModalButton from '../OpenModalButton/OpenModalButton';
 import LoginFormModal from '../LoginFormModal/LoginFormModal';
@@ -43,9 +44,9 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
-    <>
-      <button onClick={toggleMenu}>
-        <FaUserCircle />
+    <div>
+      <button onClick={toggleMenu} className='profile'>
+        <GiHamburgerMenu /><FaUserCircle />
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
@@ -74,7 +75,7 @@ function ProfileButton({ user }) {
           </>
         )}
       </ul>
-    </>
+    </div>
   );
 }
 

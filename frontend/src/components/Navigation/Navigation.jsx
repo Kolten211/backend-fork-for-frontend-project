@@ -10,11 +10,14 @@ function Navigation({ isLoaded }) {
 
   return (
     <ul>
-      <li className="font-size-xl">
-        <NavLink to="/">
+      <div className='logo-container'>
+        <li className="font-size-xl">
+          <img src="https://res.cloudinary.com/dozliephp/image/upload/v1729123642/Jujutsu_favicon_igilzz.png" alt="JujutsuBnB" className='logo' />
+          <NavLink to="/" className='Home'>
           JujutsuBnB
-        </NavLink>
+          </NavLink>
       </li>
+      </div>
       {isLoaded && (
         <li>
           <ProfileButton user={sessionUser} />
