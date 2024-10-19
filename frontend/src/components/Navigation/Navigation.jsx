@@ -1,6 +1,6 @@
 // frontend/src/components/Navigation/Navigation.jsx
 
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
@@ -9,21 +9,25 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
 
   return (
-    <ul>
-      <div className='logo-container'>
-        <li className="font-size-xl">
-          <img src="https://res.cloudinary.com/dozliephp/image/upload/v1729123642/Jujutsu_favicon_igilzz.png" alt="JujutsuBnB" className='logo' />
-          <NavLink to="/" className='Home'>
-          JujutsuBnB
-          </NavLink>
-      </li>
-      </div>
-      {isLoaded && (
-        <li>
-          <ProfileButton user={sessionUser} />
+    <div className='header'>
+      <ul>
+        <div className='logo-container'>
+          <li className="font-size-xl">
+            <img src="https://res.cloudinary.com/dozliephp/image/upload/v1729123642/Jujutsu_favicon_igilzz.png" alt="JujutsuBnB" className='logo' />
+            <NavLink to="/" className='Home'>
+            JujutsuBnB 
+            </NavLink>
         </li>
-      )}
-    </ul>
+        </div>
+        <div className='options'>
+          <Link to='/create-spot'>Create a New Spot</Link>
+        {isLoaded && (
+          <li>
+          <ProfileButton user={sessionUser} />
+          </li>
+      )}</div>
+      </ul> 
+    </div>
   );
 }
 

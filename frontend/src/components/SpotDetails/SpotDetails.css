@@ -1,0 +1,55 @@
+.spot-details {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1{
+    color: black;
+    font-style: italic;
+    font-weight: bolder;
+}
+  
+.spot-images {
+    display: flex;
+    max-height: 1000px;
+    flex-direction: row;
+    align-items: center;
+}
+  
+.large-image {
+    width: 50%;
+    height: auto;
+    margin-bottom: 20px;
+}
+  
+.small-images {
+    display: flex;
+    flex-direction: column; 
+    width: 50%;
+    gap: 10px;
+}
+  
+.small-image {
+    width: 50%;
+    height: 50%;
+    border-radius: 5px;
+}
+   
+.callout-box {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    align-items: center;
+    max-width: 300px;
+    margin-top: 20px;
+    position: absolute;
+    right: 20px;
+}
+
+/* .reserve-button{
+    background-color: #DD969A;
+} */

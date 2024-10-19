@@ -4,18 +4,20 @@
     max-width: 1200px;
     margin: 0 auto;
     height: 75vh;
-    gap: 10px;
+    gap: 0px;
   }
   .spot-tile-link {
     text-decoration: none;
     color: inherit;
   }
   .spot-tile {
-    background-color: rgba(48, 102, 155);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* background-color: rgba(48, 102, 155); */
+    border-radius: 4px;
+    
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    color: #000;
     padding: 20px;
-    width: 200px;
+    width: 230px;
     transition: transform 0.2s;
   }
   

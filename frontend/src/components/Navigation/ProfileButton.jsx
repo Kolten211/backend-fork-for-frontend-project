@@ -44,7 +44,7 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
-    <div>
+    <div style={{ position: 'relative'}}>
       <button onClick={toggleMenu} className='profile'>
         <GiHamburgerMenu /><FaUserCircle />
       </button>

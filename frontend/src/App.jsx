@@ -7,6 +7,7 @@ import SpotTiles from './components/SpotTiles/SpotTiles';
 // import PrivateRoute from './components/LandingPage/PrivateRoute';
 import LandingPage from './components/LandingPage/LandingPage';
 import SpotDetails from './components/SpotDetails/SpotDetails';
+import CreateNewSpot from './components/CreateNewSpot/CreateNewSpot';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: '/spots/:spotId',
         element: <SpotDetails />
+      },
+      {
+        path: '/create-spot',
+        element: <CreateNewSpot />
       },
     ]
   }
