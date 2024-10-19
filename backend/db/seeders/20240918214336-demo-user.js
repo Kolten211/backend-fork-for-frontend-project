@@ -12,26 +12,47 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await User.bulkCreate([
       {
-        firstName: "Marc",
-        lastName: "Depot",
-        email: 'demo@user.io',
-        username: 'Demo-lition',
+        firstName: "Yuji",
+        lastName: "Itadori",
+        email: 'jlaw1fan@jjk.io',
+        username: 'divergent-fist',
         hashedPassword: bcrypt.hashSync('demolizer')
       },
       {
-        firstName: "Marked",
-        lastName: "Depotted",
-        email: 'user1@user.io',
-        username: 'LarryTest',
-        hashedPassword: bcrypt.hashSync('hilarrious')
+        firstName: "Megumi",
+        lastName: "Fushiguro",
+        email: 'demondogs@jjk.io',
+        username: 'divinetreasure',
+        hashedPassword: bcrypt.hashSync('paparaga')
       },
       {
-        firstName: "Marque",
-        lastName: "Depotte",
-        email: 'user2@user.io',
-        username: 'FrankTest',
-        hashedPassword: bcrypt.hashSync('frankly')
-      }
+        firstName: "Nobara",
+        lastName: "Kugisaki",
+        email: 'tokyolover@jjk.io',
+        username: 'strawdoll',
+        hashedPassword: bcrypt.hashSync('hairpin')
+      },
+      {
+        firstName: "Saturo",
+        lastName: "Gojo",
+        email: 'Getobff@jjk.io',
+        username: 'chosen-one',
+        hashedPassword: bcrypt.hashSync('infinity')
+      },
+      {
+        firstName: "Maki",
+        lastName: "Zenin",
+        email: 'Maki@jjk.io',
+        username: 'restricted-one',
+        hashedPassword: bcrypt.hashSync('heavenly')
+      },
+      {
+        firstName: "Kento",
+        lastName: "Nanami",
+        email: 'beachlover@jjk.io',
+        username: 'best-mentor',
+        hashedPassword: bcrypt.hashSync('overtime')
+      }, 
     ], { validate: true });
   },
 

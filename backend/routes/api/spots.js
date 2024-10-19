@@ -20,7 +20,10 @@ function calcAvg(reviews) {
     if (!reviews) { // Check if reviews is undefined or null
         return 0; // Return 0 if no reviews
       }
-
+    // if (!reviews.length) {
+    //     return 0
+    // }
+    // const total = reviews.reduce((acc, review) => acc + review.stars, 0);
     const rating = reviews.map(review => review.stars); //! Extract the stars from EACH review
     let totalRating = 0; 
     // Calculate the total sum of the rating
@@ -34,16 +37,20 @@ function calcAvg(reviews) {
     } else {
         return 0;
     }
+    // return total / reviews.length
 };
 
-function getPreviewImg(images) {
-    if (!images) {
-        return null;
-    }
-    const previewImage = images.find(image => image.preview === true);
-    return previewImage ? previewImage.url : null;
+// function getPreviewImg(images) {
+//     if (!images) {
+//         return null;
+//     }
+//     const previewImage = images.find(image => image.preview === true);
+//     return previewImage ? previewImage.url : null;
+// }
+function getPreviewImg(spotImages) {
+    return spotImages.length ? spotImages[0].url : null;
 }
-
+  
 
 // router.get('/', async (req, res) => {
 //     const allSpots = await Spot.findAll({
@@ -164,7 +171,7 @@ router.get('/', async (req, res) => {
 
     const queryOptions = {
         include: [
-          {
+          { 
             model: Review,
             as: 'Reviews',
             attributes: [],
@@ -172,7 +179,9 @@ router.get('/', async (req, res) => {
           {
             model: SpotImage,
             as: 'SpotImages',
-            attributes: [], 
+            where:{ preview: true},
+            attributes: ['url'],
+            required:false 
           }
         ],
         limit: req.query.size || 20, // defaulted to 20
@@ -217,7 +226,7 @@ router.get('/', async (req, res) => {
     const allSpots = await Spot.findAll(queryOptions); 
 
     const spotDeets =  await Promise.all(allSpots.map(spot => {
-        const avgRating = calcAvg(spot.Reviews);
+        const avgStarRating = calcAvg(spot.Reviews);
         const previewImg = getPreviewImg(spot.SpotImages);
         return {
             id: spot.id,
@@ -233,11 +242,11 @@ router.get('/', async (req, res) => {
             price: parseFloat(spot.price),
             createdAt: spot.createdAt,
             updatedAt: spot.updatedAt,
-            avgRating: avgRating,
+            avgStarRating: avgStarRating,
             previewImage: previewImg
         }
     })); 
-
+    
     return res.status(200).json({ Spots: spotDeets, page: req.query.page || 1, size: req.query.size || 20 });
 // } catch (error) {
 //     console.error(error);
@@ -324,6 +333,7 @@ router.get('/:spotId', async (req, res) => {
         const avgRating = calcAvg(spotById.Reviews);
         const numReviews = calcReviews(spotById.Reviews);
         const previewImg = getPreviewImg(spotById.SpotImages);
+        
 
         const spotDeets = {
             id: spotById.id,
@@ -348,7 +358,7 @@ router.get('/:spotId', async (req, res) => {
                 lastName: spotById.User.lastName,
             }
         };
-
+        console.log('Fetched spot data:', spotDeets);
     return res.status(200).json(spotDeets);
 
 });
@@ -388,7 +398,7 @@ router.post('/', restoreUser, requireAuth, async (req, res) => {
             description, 
             price,
     }); 
-
+    
     res.status(201).json(newSpot); 
 
 })   
