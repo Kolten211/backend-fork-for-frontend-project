@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation';
 import * as sessionActions from './store/session';
 import LandingPage from './components/LandingPage/LandingPage';
-import SpotDetail from './components/SpotDetails/SpotDetails';
+import SpotDetails from './components/SpotDetails/SpotDetails';
 function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -31,9 +31,13 @@ const router = createBrowserRouter([
         path: '/',
         element: <LandingPage />
       },
+      // {
+      //   path: '/spots',
+      //   element: <SpotTiles />
+      // },
       {
-        path: '/spots',
-        element: <SpotTiles />
+        path: '/spots/:spotId',
+        element: <SpotDetails />
       },
     ]
   }
