@@ -52,7 +52,14 @@ module.exports = {
         email: 'beachlover@jjk.io',
         username: 'best-mentor',
         hashedPassword: bcrypt.hashSync('overtime')
-      }, 
+      },
+      {
+        firstName: 'Ryomen',
+        lastName: 'Sukuna',
+        email: 'disgracedone@jjk.io',
+        username: 'KingofCurses',
+        hashedPassword: bcrypt.hashSync('MalevolentShrine ')
+      } 
     ], { validate: true });
   },
 

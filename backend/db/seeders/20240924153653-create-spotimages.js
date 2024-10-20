@@ -88,27 +88,27 @@ module.exports = {
       },   
       {
         spotId: 4, 
-        url: 'https://res.cloudinary.com/dozliephp/image/upload/v1729185523/519566733443_168437547908961_hz448x.jpg',
+        url: 'https://res.cloudinary.com/dozliephp/image/upload/v1729382124/th_p4zi5n.jpg',
         preview: true,
       },
       {
         spotId: 4, 
-        url: 'https://res.cloudinary.com/dozliephp/image/upload/v1729285684/th_n5xbrh.jpg',
+        url: 'https://res.cloudinary.com/dozliephp/image/upload/v1729382157/th_nru7cu.jpg',
         preview: false,
       },
       {
         spotId: 4, 
-        url: 'https://res.cloudinary.com/dozliephp/image/upload/v1729285735/th_cfzxlo.jpg',
+        url: 'https://res.cloudinary.com/dozliephp/image/upload/v1729381878/th_u8nrpr.jpg',
         preview: false,
       },
       {
         spotId: 4, 
-        url: 'https://res.cloudinary.com/dozliephp/image/upload/v1729285753/th_syd8un.jpg',
+        url: 'https://res.cloudinary.com/dozliephp/image/upload/v1729381849/th_gp2o2i.jpg',
         preview: false,
       },
       {
         spotId: 4, 
-        url: 'https://res.cloudinary.com/dozliephp/image/upload/v1729286539/c01db2d5-317c-442e-8ae4-5ab833f8915d_k6gby6.webp',
+        url: 'https://res.cloudinary.com/dozliephp/image/upload/v1729381812/th_wxtjh2.jpg',
         preview: false,
       },
       {
