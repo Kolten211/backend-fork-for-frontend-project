@@ -71,26 +71,30 @@ export const removeReview = (reviewId) => async (dispatch) => {
 
 const reviewsReducer = (state = {}, action) => {
     switch (action.type) {
-        case LOAD_REVIEWS:
+        case LOAD_REVIEWS: {
             const reviews = {};
             action.reviews.forEach((review) => {
                 reviews[review.id] = review
             });
         return reviews;
-        case ADD_REVIEW:
+        }
+        case ADD_REVIEW: {
             return {
                 ...state,
                 [action.review.id]: action.review,
             }
-        case UPDATE_REVIEW:
+        }
+        case UPDATE_REVIEW:{
             return {
                 ...state,
                 [action.review.id]: action.review,
             };
-        case DELETE_REVIEW:
+        }
+        case DELETE_REVIEW: {
             const newState = {...state};
             delete newState[action.reviewId];
             return newState;
+        }
             default:
                 return state
     }

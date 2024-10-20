@@ -1,6 +1,7 @@
 // frontend/src/components/LoginFormModal/LoginFormModal.jsx
 
 import { useState } from 'react';
+import { Link } from 'react-router-dom'
 import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
@@ -25,6 +26,17 @@ function LoginFormModal() {
         }
       });
   };
+
+  const demoUser = () => {
+    return dispatch(sessionActions.login({credential: 'KingofCurses', password: 'MalevolentShrine'}))
+    .then(closeModal)
+    .catch(async (res) => {
+      const data= await res.json();
+      if (data && data.errors) {
+        setErrors(data.errors);
+      }
+    })
+  }
 
   return (
     <>
@@ -52,6 +64,7 @@ function LoginFormModal() {
           <p>{errors.credential}</p>
         )}
         <button type="submit">Log In</button>
+        <Link onClick={demoUser}>Demo User</Link>
       </form>
     </>
   );

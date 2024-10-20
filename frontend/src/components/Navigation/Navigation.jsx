@@ -20,7 +20,7 @@ function Navigation({ isLoaded }) {
         </li>
         </div>
         <div className='options'>
-          <Link to='/create-spot'>Create a New Spot</Link>
+          <Link to='/create-spot' className='hyper'>Create a New Spot</Link>
         {isLoaded && (
           <li>
           <ProfileButton user={sessionUser} />

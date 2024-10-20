@@ -44,20 +44,23 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
-    <div style={{ position: 'relative'}}>
+    <div>
       <button onClick={toggleMenu} className='profile'>
         <GiHamburgerMenu /><FaUserCircle />
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
-          <>
-            <li>{user.username}</li>
+          <div className='options-menu'>
+            <li>Hello, {user.username}</li>
             <li>{user.firstName} {user.lastName}</li>
             <li>{user.email}</li>
+            <div className='manage-spots'>
+              <button className='manage-button'>Manage Spots</button>
+            </div>
             <li>
               <button onClick={logout}>Log Out</button>
             </li>
-          </>
+          </div>
         ) : (
           <>
             <li>

@@ -1,14 +1,24 @@
-import CreateNewSpot from "../components/CreateNewSpot/CreateNewSpot";
 import { csrfFetch } from "./csrf";
 
 const CREATE_SPOT = 'CREATE_SPOT'
+const LOAD_SPOTS = 'LOAD_SPOTS'
 
+const loadSpots = (spots) => ({
+    type: 'LOAD_SPOTS',
+    spots
+})
 const createSpotAction = (spot) => ({
-    type: CREATE_SPOT,
+    type: 'CREATE_SPOT',
     spot,
 });
 
-
+export const fetchSpots = () => async (dispatch) => {
+    const response = await csrfFetch('/api/spots');
+    if (response.ok) {
+        const spots = await response.json();
+        dispatch(loadSpots(spots))
+    }
+}
 export const createSpot = (spotData) => async (dispatch) => {
     const response = await csrfFetch('/api/spots', {
         method: 'POST', 
@@ -30,11 +40,16 @@ export const createSpot = (spotData) => async (dispatch) => {
 
 const spotReducer = (state = {}, action) => {
     switch (action.type) {
+        case LOAD_SPOTS:
+            return {
+                ...state,
+                ...action.spots
+            };
         case CREATE_SPOT :
             return { 
                 ...state,
-                [actoin.spot.id]: action.spot,
-            }
+                [action.spot.id]: action.spot,
+            };
         default: 
         return state
     }

@@ -29,11 +29,11 @@ function CreateNewSpot() {
     };
 
     const handleSubmit = async (event) => {
-        event.preventDefalut();
+        event.preventDefault();
         try {
             const newSpot = await dispatch(createSpot(spotData));
-            if (response.errors) {
-                setErrors(response.errors);
+            if (newSpot.errors) {
+                setErrors(newSpot.errors);
                 return;
             }
             navigate(`/spots/${newSpot.id}`)
@@ -47,7 +47,7 @@ function CreateNewSpot() {
 return (
   <form onSubmit={handleSubmit} className="createSpotForm">
     <h1 className="create-h1">Create New Spot</h1>
-    <h3>Where's your place located?</h3>
+    <h3>Where&apos;s your place located?</h3>
     <p>Guests will only get your exact address once they booked a reservation.</p>
     <label className="create-label">Country:
       <input
@@ -58,6 +58,7 @@ return (
         className="create-input"
         placeholder="Country"
       />
+      {errors.country && <div className="error">{errors.country}</div>}
     </label>
     <label className="create-label">Address:
       <input
@@ -68,6 +69,7 @@ return (
         className="create-input"
         placeholder="Address"   
       />
+      {errors.address && <div className="error">{errors.address}</div>}
     </label>
     <div className="citystate">
         <label className="create-label">City:
@@ -80,6 +82,7 @@ return (
             placeholder="City"
         />
         </label>
+        {errors.city && <div className="error">{errors.city}</div>}
         <label className="create-label">State:
         <input
             type="text"
@@ -89,6 +92,7 @@ return (
             className="create-input-state"
             placeholder="State"
         />
+        {errors.state && <div className="error">{errors.state}</div>}
         </label>
     </div>  
     {/* <label className="create-label">Latitude:
@@ -121,12 +125,13 @@ return (
             className="create-input-description"
             placeholder="Please write at least 30 characters"
         />
+        {errors.description && <div className="error">{errors.description}</div>}
         </label>
     </div>
     <div className="title-border">
         <label className="create-label">
             <h4>Create a title for your spot</h4>
-            <p>Catch guests' attention with a spot title that highlights what makes your place special.</p>
+            <p>Catch guests&apos; attention with a spot title that highlights what makes your place special.</p>
         <input
             type="text"
             name="name"
@@ -135,6 +140,7 @@ return (
             className="create-input"
             placeholder="Name of your spot"
         />
+        {errors.name && <div className="error">{errors.name}</div>}
         </label>
     </div>
     <div className="price-border">
@@ -149,6 +155,7 @@ return (
             className="create-input"
             placeholder="Price per night (USD)"
         />
+        {errors.price && <div className="error">{errors.price}</div>}
         </label>
     </div>
     <div className="photos">
@@ -157,13 +164,14 @@ return (
             <p>Submit a link to at least one photo to publish your spot</p>
         <input
             type="text"
-            name="price"
-            value={spotData.price}
+            name="preview image"
+            value={spotData.previewImage}
             onChange={handleChange}
             className="create-input"
             placeholder="Preview Image URL"
         />
         </label>
+        {errors.photo1 && <div className="error">{errors.photo1}</div>}
         <label className="create-label">
             <input
             type="text"
