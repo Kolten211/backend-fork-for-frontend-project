@@ -11,7 +11,7 @@ function SpotTile({ spot }) {
           <h3>{spot.name}</h3>
           <div className='spot-info'>
             <p>{spot.city}, {spot.state}</p>
-            <p className='spot-rating'><FaStar />{spot.avgStarRating}</p>
+            <p className='spot-rating'><FaStar />{spot.avgStarRating.toFixed(1)}</p>
           </div>
           <p>${spot.price}night</p>
         </div>

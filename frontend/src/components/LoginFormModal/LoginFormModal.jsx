@@ -27,16 +27,16 @@ function LoginFormModal() {
       });
   };
 
-  const demoUser = () => {
-    return dispatch(sessionActions.login({credential: 'KingofCurses', password: 'MalevolentShrine'}))
-    .then(closeModal)
-    .catch(async (res) => {
-      const data= await res.json();
-      if (data && data.errors) {
-        setErrors(data.errors);
-      }
-    })
-  }
+  // const demoUser = () => {
+  //   return dispatch(sessionActions.login({credential: 'KingofCurses', password: 'MalevolentShrine'}))
+  //   .then(closeModal)
+  //   .catch(async (res) => {
+  //     const data= await res.json();
+  //     if (data && data.errors) {
+  //       setErrors(data.errors);
+  //     }
+  //   })
+  // }
 
   return (
     <>
@@ -64,7 +64,7 @@ function LoginFormModal() {
           <p>{errors.credential}</p>
         )}
         <button type="submit">Log In</button>
-        <Link onClick={demoUser}>Demo User</Link>
+        {/* <Link onClick={demoUser}>Demo User</Link> */}
       </form>
     </>
   );
