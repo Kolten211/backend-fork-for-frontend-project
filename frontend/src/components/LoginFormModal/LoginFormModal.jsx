@@ -1,7 +1,7 @@
 // frontend/src/components/LoginFormModal/LoginFormModal.jsx
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
