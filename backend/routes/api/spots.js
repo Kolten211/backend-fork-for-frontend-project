@@ -238,8 +238,8 @@ router.get('/', async (req, res) => {
         }
     })); 
 
-    return res.status(200).json({ Spots: spotDeets, page: req.query.page || 1, size: req.query.size || 20 });
-// } catch (error) {
+    return res.status(200).json(spotDeets);
+    // } catch (error) {                      { Spots:    , page: req.query.
 //     console.error(error);
 //     return res.status(400).json({ message: 'Bad Request' });
 // }
