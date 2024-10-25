@@ -1,7 +1,8 @@
 .spot-tiles-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    justify-content: center;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1200px;
     margin: 0 auto;
+    height: 75vh;
+    gap: 0px;
 }

@@ -1,30 +1,42 @@
 .spot-tile-link {
     text-decoration: none;
-    color:aqua
-}
-
-.spot-tile {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    overflow: hidden;
-    width: 300px;
-    box-shadow: 0 15px 15px rgba(0, 0, 0, .1);
+    color: inherit;
+  }
+  .spot-tile {
+    /* background-color: rgba(48, 102, 155); */
+    border-radius: 4px;
+    
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    color: #000;
+    padding: 20px;
+    width: 230px;
     transition: transform 0.2s;
-}
-
-.spot-tile:hover {
+  }
+  
+  .spot-tile:hover {
     transform: scale(1.05);
-}
+    cursor: pointer;
+  }
+  
+  .spot-image {
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+  }
+  .spot-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%,
 
-.spot-image {
-    width:100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.spot-info {
-    padding: 10px;
-}
+  }
+  
+  h3 {
+    margin: 10px 0 5px 0;
+  }
+  
+  p {
+    margin: 0;
+  }
 
 .spot-rating {
     color: #ff9900
