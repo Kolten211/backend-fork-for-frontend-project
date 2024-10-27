@@ -11,7 +11,7 @@ function Navigation({ isLoaded }) {
   return (
     <ul className='Navigation'>
       <li className="font-size-xl">
-        <NavLink to="/">JujutsuBnB</NavLink>
+        <NavLink to="/"><img src='https://res.cloudinary.com/dozliephp/image/upload/v1729123642/Jujutsu_favicon_igilzz.png' /> JujutsuBnB</NavLink>
       </li>
       {isLoaded && (
         <li>

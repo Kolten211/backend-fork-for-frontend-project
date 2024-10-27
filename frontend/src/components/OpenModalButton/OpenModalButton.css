@@ -1,0 +1,25 @@
+.modal-button {
+    background-color: #1e90ff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .modal-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+  
+  .modal-button:active {
+    background-color: #004494;
+    transform: translateY(0);
+  }
+  
+  .modal-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(30, 144, 255,  0.5);
+}

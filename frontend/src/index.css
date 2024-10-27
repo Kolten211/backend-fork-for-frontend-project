@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    display: flex;
+    justify-content: center;
+    background-color: #282D3F;
+    height: 100vh;
+}
