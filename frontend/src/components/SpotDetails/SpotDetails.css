@@ -1,0 +1,41 @@
+.spot-details {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.spot-details h1{
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.spot-details p{
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.spot-imgs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.large-img {
+    width: 60%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.small-img{
+    width: 150px;
+    height: 100px;
+}
+
+.callout-box{
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin: 15px;
+}
