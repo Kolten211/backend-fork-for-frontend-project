@@ -32,8 +32,8 @@ module.exports = {
       {
         spotId: 4,
         userId: 2,
-        review: "Beautiful art, only heard one pew though.",
-        stars: 2,
+        review: "Truly felt at peace will be coming back!",
+        stars: 3,
       },
       {
         spotId: 4,
@@ -41,6 +41,13 @@ module.exports = {
         review: "Felt right at home, very cozy.",
         stars: 4,
       },
+      {
+        spotId: 4,
+        userId: 7,
+        review: "meh",
+        stars: 2,
+      },
+
 
     ], { validate: true })
 
