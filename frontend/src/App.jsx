@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         element: <LandingPage />
       },
       {
-        path: '/:spotId',
+        path: 'spots/:spotId',
         element: <SpotDetailPage />
       }
     ]

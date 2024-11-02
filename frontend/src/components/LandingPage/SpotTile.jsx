@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa";
 
 const SpotTile = ({ spot }) => {
     return (
-        <NavLink to={`/${spot.id}`} className="spot-tile-link">
+        <NavLink to={`/spots/${spot.id}`} className="spot-tile-link">
             <div className="spot-tile">
                 <img src={spot.previewImage || 'default-image-url'} alt={spot.name} />
                 <h3>{spot.name}</h3>

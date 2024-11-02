@@ -42,10 +42,10 @@ export const fetchSpots = () => async (dispatch) => {
 };
 
 export const fetchSpotDetails = (spotId) => async (dispatch) => {
-    const response = await csrfFetch(`/spi/spots/${spotId}`);
+    const response = await csrfFetch(`/api/spots/${spotId}`);
     if (response.ok) {
-        const spot = await response.json();
-        dispatch(loadSpotDetails(spot))
+        const data = await response.json();
+        dispatch(loadSpotDetails(data));
     }
 };
 
