@@ -16,7 +16,7 @@ const SpotDetailPage = () => {
     const reviews = reviewsState.Reviews || [];
     
     console.log('Spot:', spot);
-    console.log('Reviews State:', reviewsState)
+    console.log('Preview?:', reviewsState)
 
     useEffect(() => {
         const fetchData = async () => {
