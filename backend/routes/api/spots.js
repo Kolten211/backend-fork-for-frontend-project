@@ -172,7 +172,7 @@ router.get('/', async (req, res) => {
           {
             model: SpotImage,
             as: 'SpotImages',
-            attributes: [], 
+            attributes: ['url', 'preview'], 
           }
         ],
         limit: req.query.size || 20, // defaulted to 20
