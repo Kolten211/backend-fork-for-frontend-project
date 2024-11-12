@@ -1,3 +1,5 @@
+const initialState = [];
+
 const LOAD_REVIEWS = 'LOAD_REVIEWS';
 const ADD_REVIEW = 'ADD_REVIEW';
 const UPDATE_REVIEW = 'UPDATE_REVIEW';
@@ -24,10 +26,11 @@ const deleteReview = (reviewId) => ({
 });
 
 
-export const fetchReviews = () => async (dispatch) => {
-    const response = await fetch('/api/reviews');
+export const fetchReviews = (spotId) => async (dispatch) => {
+    const response = await fetch(`/api/spots/${spotId}/reviews`);
     if (response.ok) {
         const reviews = await response.json();
+        console.log('This is the reviews', reviews)
         dispatch(loadReviews(reviews));
     }
 };
@@ -69,14 +72,14 @@ export const removeReview = (reviewId) => async (dispatch) => {
     }
 };
 
-const reviewsReducer = (state = {}, action) => {
+const reviewsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_REVIEWS: {
-            const reviews = {};
-            action.reviews.forEach((review) => {
-                reviews[review.id] = review
-            });
-        return reviews;
+            
+            const reviewsArray = action.reviews.Reviews;
+            console.log('action.reviews:', reviewsArray);
+            if (Array.isArray(reviewsArray))
+            return [...reviewsArray];
         }
         case ADD_REVIEW: {
             return {

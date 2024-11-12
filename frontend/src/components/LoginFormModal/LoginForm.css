@@ -37,7 +37,7 @@ button:hover {
     background-color: #C7383C;
 }
   
-h1 {
+.login-title {
     text-align: center;
     color: #333;
 }

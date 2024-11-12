@@ -21,7 +21,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 50px;
+    gap: 40px;
     border-bottom: 2px solid #000;
 }
 /* .citystate label:after{
@@ -67,6 +67,7 @@
     margin-top: 5px;
     border: 2px solid #000;
     border-radius: 5px;
+    resize: none;
 }
 .create-button {
     background-color: #C7383C;

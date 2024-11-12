@@ -1,41 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaStar } from "react-icons/fa";
 import ReserveFormModal from '../ReserveFormModal/ReserveFormModal';
 import './SpotDetails.css';
 import OpenModalButton from '../OpenModalButton/OpenModalButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSpotDetails } from '../../store/spotActions';
+import { fetchReviews } from '../../store/review';
 
 function SpotDetails() {
   const { spotId } = useParams();
-  const [spot, setSpot] = useState(null);
-//   const [reviews, setReviews] = useState(null);
+  const dispatch = useDispatch();
+  
+  
+  
 
   useEffect(() => {
-    fetch(`/api/spots/${spotId}`)
-      .then(response => response.json())
-      .then(data => {
-        console.log('Fetched spot data:', data); // Log the entire data
-        if (data.smallImagesUrls) {
-          console.log('Small image URLs:', data.smallImagesUrls); // Log small image URLs
-        }
-        setSpot(data);
-      })
-      .catch(e => console.error('Error fetching spot details:', e));
-  }, [spotId]);
+    dispatch(fetchSpotDetails(spotId));
+    dispatch(fetchReviews(spotId));
+  }, []);
 
-//   useEffect(() => {
-//     if (spotId) {
-//         fetch('/api/spots/${spotId}/reviews')
-//         .then(response => response.json())
-//         .then(data => {
-//             setReviews(data)
-//         })
-//         .catch(e => console.error('Error fetching reviews:', e))
-//     }
-//   }, [spotId]);
+  const spotdetails = useSelector(state => state.spot);
+  const spot = spotdetails[0];
+
+  const reviews = useSelector(state => state.review);
+  
 
 
-  if (!spot) return <div>Loading...</div>;
+  if (!spot) return <div>Loading...</div>; // see if everything is redering correctly
 
   return (
     <div className="spot-details">
@@ -63,17 +55,17 @@ function SpotDetails() {
           modalComponent={<ReserveFormModal />}
         />
       </div>
-      {/* <div className="reviews-summary">
-        <h2> <FaStar /> {spot.avgStarRating} ({reviews.length})</h2>
+      <div className="reviews-summary">
+        <h2> <FaStar /> {spot.avgStarRating} ·{spot.numReviews}</h2>
         <ul className="reviews-list">
-          {reviews.map((review, index) => (
-            <li key={index}>
-              <p>{review.text}</p>
+          {reviews.map((review) => (
+            <li key={review.id}>
+              <p>{review.review}</p>
               <p><FaStar /> {review.stars}</p>
             </li>
           ))}
         </ul>
-      </div> */}
+      </div>
     </div>
   );
 }

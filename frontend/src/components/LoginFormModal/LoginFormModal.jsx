@@ -1,7 +1,7 @@
 // frontend/src/components/LoginFormModal/LoginFormModal.jsx
 
 import { useState } from 'react';
-// import { Link } from 'react-router-dom'
+// import { NavLink } from 'react-router-dom'
 import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
@@ -27,20 +27,21 @@ function LoginFormModal() {
       });
   };
 
-  // const demoUser = () => {
-  //   return dispatch(sessionActions.login({credential: 'KingofCurses', password: 'MalevolentShrine'}))
-  //   .then(closeModal)
-  //   .catch(async (res) => {
-  //     const data= await res.json();
-  //     if (data && data.errors) {
-  //       setErrors(data.errors);
-  //     }
-  //   })
-  // }
+  const demoUser = () => {
+    return dispatch(sessionActions.login({credential: 'disgracedone@jjk.io', password: 'MalevolentShrine'}))
+    .then(closeModal)
+    .catch(async (res) => {
+      const data= await res.json();
+      // console.log('what is this', data)
+      if (data && data.errors) {
+        setErrors(data.errors);
+      }
+    })
+  }
 
   return (
     <>
-      <h1>Log In</h1>
+      <h1 className='login-title'>Log In</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Username or Email
@@ -64,7 +65,7 @@ function LoginFormModal() {
           <p>{errors.credential}</p>
         )}
         <button type="submit">Log In</button>
-        {/* <Link onClick={demoUser}>Demo User</Link> */}
+        <button onClick={demoUser}>Demo User</button>
       </form>
     </>
   );

@@ -4,43 +4,113 @@ import { useNavigate } from "react-router-dom";
 import { createSpot } from "../../store/spotActions";
 import './CreateNewSpot.css'
 import { FiDollarSign } from "react-icons/fi";
+
 function CreateNewSpot() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [spotData, setSpotData] = useState({
-        address: '',
-        city: '',
-        state: '',
-        country: '',
-        lat: '',
-        lng: '',
-        name: '',
-        description: '',
-        price: ''
-    });
+    
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [country, setCountry] = useState('');
+    // const [lat,] = useState('');
+    // const [lng, ] = useState('');
+    const [name, setName] = useState('');
+    const [description, setDes] = useState('');
+    const [price, setPrice] = useState('');
+    const [previewImg, setPreview] = useState('');
+    const [images, setImages] = useState('')
 
-    const [errors, setErrors] = useState({})
+    const validateForm = () => {
+        let isValid = true;
 
-    const handleChange = (event) => {
-        setSpotData({
-            ...spotData,
-            [event.target.name]: event.target.value
-        })
-    };
+        const  address = document.getElementById('address').value;     
+        const  city = document.getElementById('city').value;
+        const  state = document.getElementById('state').value;  
+        const  country = document.getElementById('country').value;  
+        const  name = document.getElementById('name').value;  
+        const  description = document.getElementById('description').value;  
+        const  price = document.getElementById('price').value;
+        const previewImg = document.getElementById('previewImg')
+        document.getElementById('priceError').textContent = '';
+        document.getElementById('descriptionError').textContent = '';
+        document.getElementById('previewImgError').textContent = '';
+        
+        if(description.length > 30) {
+            document.getElementById('descriptionError').textContent = 'Description needs 30 or more characters.'
+            isValid = false
+        }
+
+        if(!address) {
+            document.getElementById('addressError').textContent = 'Adress is required.'
+            isValid = false
+        }        
+        if(!city) {
+            document.getElementById('cityError').textContent = 'City is required.'
+            isValid = false
+        }
+        if(!state) {
+            document.getElementById('stateError').textContent = 'State is required'
+            isValid = false
+        }
+        if(!country) {
+            document.getElementById('countryError').textContent = 'Country is required'
+            isValid = false
+        }
+        if(!name) {
+            document.getElementById('nameError').textContent = 'Name is required'
+            isValid = false
+        }
+
+        if( !price || isNaN(price) ){
+            document.getElementById('priceError').textContent = 'Price is required'
+            isValid = false
+        }
+
+        if(!previewImg) {
+            document.getElementById('previewImg').textContent = 'Preview Image requiered'
+            isValid = false
+        }
+
+        return isValid
+    }
+
+    // const [errors, setErrors] = useState({})
+
+    // const handleChange = (event) => {
+    //     setSpotData({
+    //         ...spotData,
+    //         [event.target.name]: event.target.value
+    //     })
+    // };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        try {
-            const newSpot = await dispatch(createSpot(spotData));
-            if (newSpot.errors) {
-                setErrors(newSpot.errors);
-                return;
+        
+            if (validateForm) {
+                console.log('START')
+                const spotData = {
+                    address,
+                    city,
+                    state,
+                    country,
+                    name,
+                    description,
+                    price: parseFloat(price),
+                    previewImg,
+                    images: images.split(',').map(url => url.trim())
+                }
+                console.log('Next step!!')
+                console.log('===>', spotData)
+                const newSpot = await dispatch(createSpot(spotData));
+                console.log('Dispatch??')
+                console.log("Submitted",newSpot)
+                navigate(`/spots/${newSpot.id}`)
+
+             
             }
-            navigate(`/spots/${newSpot.id}`)
-        } catch (e) {
-            console.error('Error creating spot.', e);
-        }
-    };
+    } 
+    
 
 
 
@@ -52,47 +122,51 @@ return (
     <label className="create-label">Country:
       <input
         type="text"
+        id="country"
         name="country"
-        value={spotData.country}
-        onChange={handleChange}
+        value={country}
+        onChange={(e) => setCountry(e.target.value)}
         className="create-input"
         placeholder="Country"
       />
-      {errors.country && <div className="error">{errors.country}</div>}
+      <div id= "country" className="error"></div>
     </label>
     <label className="create-label">Address:
       <input
         type="text"
+        id="address"
         name="address"
-        value={spotData.address}
-        onChange={handleChange}
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
         className="create-input"
         placeholder="Address"   
       />
-      {errors.address && <div className="error">{errors.address}</div>}
+      <div id="addressError" className="error"></div>
     </label>
     <div className="citystate">
         <label className="create-label">City:
         <input
             type="text"
+            id="city"
             name="city"
-            value={spotData.city}
-            onChange={handleChange}
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
             className="create-input-city"
             placeholder="City"
         />
         </label>
-        {errors.city && <div className="error">{errors.city}</div>}
+        <div id="cityError" className="error"></div>
         <label className="create-label">State:
         <input
             type="text"
+            id="state"
             name="state"
-            value={spotData.state}
-            onChange={handleChange}
+            value={state}
+            onChange={(e) => setState(e.target.value)}
             className="create-input-state"
             placeholder="State"
         />
-        {errors.state && <div className="error">{errors.state}</div>}
+        <div id="stateError" className="error"></div>
         </label>
     </div>  
     {/* <label className="create-label">Latitude:
@@ -117,15 +191,15 @@ return (
         <label className="create-label">
             <h4>Describe your place to guests</h4>
             <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about your neighborhood.</p>
-        <input
-            type="text"
+        <textarea
+            id= 'description'
             name="description"
-            value={spotData.description}
-            onChange={handleChange}
+            value={description}
+            onChange={(e) => setDes(e.target.value)}
             className="create-input-description"
             placeholder="Please write at least 30 characters"
         />
-        {errors.description && <div className="error">{errors.description}</div>}
+        <div id="descripError" className="error"></div>
         </label>
     </div>
     <div className="title-border">
@@ -134,13 +208,14 @@ return (
             <p>Catch guests&apos; attention with a spot title that highlights what makes your place special.</p>
         <input
             type="text"
+            id="name"
             name="name"
-            value={spotData.name}
-            onChange={handleChange}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             className="create-input"
             placeholder="Name of your spot"
         />
-        {errors.name && <div className="error">{errors.name}</div>}
+       <div id ="nameError" className="error"></div>
         </label>
     </div>
     <div className="price-border">
@@ -149,13 +224,14 @@ return (
             <p>Competitive pricing can help your listing stand out and rank higher in search results.</p>
             <FiDollarSign /><input
             type="text"
+            id="price"
             name="price"
-            value={spotData.price}
-            onChange={handleChange}
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
             className="create-input"
             placeholder="Price per night (USD)"
         />
-        {errors.price && <div className="error">{errors.price}</div>}
+        <div id= "priceError" className="error"></div>
         </label>
     </div>
     <div className="photos">
@@ -164,20 +240,22 @@ return (
             <p>Submit a link to at least one photo to publish your spot</p>
         <input
             type="text"
-            name="preview image"
-            value={spotData.previewImage}
-            onChange={handleChange}
+            id= "previewImg"
+            name="previewImg"
+            value={previewImg}
+            onChange={(e) => setPreview(e.target.value)}
             className="create-input"
             placeholder="Preview Image URL"
         />
         </label>
-        {errors.photo1 && <div className="error">{errors.photo1}</div>}
+        <div id= "previewImgError" className="error"></div>
         <label className="create-label">
             <input
             type="text"
+            id="photo2"
             name="photo2"
-            value={spotData.photo2}
-            onChange={handleChange}
+            value={images}
+            onChange={(e) => setImages(e.target.value)}
             className="create-input"
             placeholder="Image URL"
             />
@@ -185,9 +263,10 @@ return (
         <label className="create-label">
             <input
             type="text"
+            id="photo3"
             name="photo3"
-            value={spotData.photo3}
-            onChange={handleChange}
+            value={images}
+            onChange={(e) => setImages(e.target.value)}
             className="create-input"
             placeholder="Image URL"
             />
@@ -195,9 +274,10 @@ return (
         <label className="create-label">
             <input
             type="text"
+            id="photo4"
             name="photo4"
-            value={spotData.photo4}
-            onChange={handleChange}
+            value={images}
+            onChange={(e) => setImages(e.target.value)}
             className="create-input"
             placeholder="Image URL"
             />
@@ -205,9 +285,10 @@ return (
         <label className="create-label">
             <input
             type="text"
+            id="photo5"
             name="photo5"
-            value={spotData.photo5}
-            onChange={handleChange}
+            value={images}
+            onChange={(e) => setImages(e.target.value)}
             className="create-input"
             placeholder="Image URL"
             />

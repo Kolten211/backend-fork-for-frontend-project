@@ -2,7 +2,7 @@
 import SpotTiles from '../SpotTiles/SpotTiles';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { fetchSpots } from '../../store/spotActions';
-
+import './LandingPage.css'
 const LandingPage = () => {
 //   const dispatch = useDispatch();
 //   const rawspots = useSelector(state => state.spots)
