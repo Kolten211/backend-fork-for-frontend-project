@@ -46,12 +46,10 @@ module.exports = {
       },
       lat: {
         type: Sequelize.FLOAT,
-        allowNull: false,
-        // unique: true,
+         // unique: true,
       },
       lng: {
         type: Sequelize.FLOAT,
-        allowNull: false,
         // unique: true,
       },
       name: {

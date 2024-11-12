@@ -58,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
     lat: {
       type: DataTypes.FLOAT,
       // unique: true,
-      allowNull: false, 
+      // allowNull: false, 
       validate: {
         min: -90, 
         max: 90
@@ -67,7 +67,7 @@ module.exports = (sequelize, DataTypes) => {
     lng: {
       type: DataTypes.FLOAT,
       // unique: true,
-      allowNull: false,
+      // allowNull: false,
       validate: {
         min: -180, 
         max: 180,

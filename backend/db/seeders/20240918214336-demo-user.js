@@ -58,7 +58,7 @@ module.exports = {
         lastName: 'Sukuna',
         email: 'disgracedone@jjk.io',
         username: 'KingofCurses',
-        hashedPassword: bcrypt.hashSync('MalevolentShrine ')
+        hashedPassword: bcrypt.hashSync('MalevolentShrine')
       } 
     ], { validate: true });
   },
