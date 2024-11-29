@@ -17,6 +17,7 @@ ul {
   padding: 50px;
   display: flex; /* Flexbox for alignment */
   justify-content: space-between; /* Space between elements */
+  max-width: 1200px;
   align-items: center;
 }
 

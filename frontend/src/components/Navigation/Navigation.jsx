@@ -13,9 +13,9 @@ function Navigation({ isLoaded }) {
       <ul>
         <div className='logo-container'>
           <li className="font-size-xl">
-            <img src="https://res.cloudinary.com/dozliephp/image/upload/v1729123642/Jujutsu_favicon_igilzz.png" alt="JujutsuBnB" className='logo' />
             <NavLink to="/" className='Home'>
-            JujutsuBnB 
+              <img src="https://res.cloudinary.com/dozliephp/image/upload/v1729123642/Jujutsu_favicon_igilzz.png" alt="JujutsuBnB" className='logo' />
+              JujutsuBnB 
             </NavLink>
         </li>
         </div>
@@ -28,7 +28,7 @@ function Navigation({ isLoaded }) {
       )}</div>
       </ul> 
     </div>
-  );
+  );  
 }
 
 export default Navigation;

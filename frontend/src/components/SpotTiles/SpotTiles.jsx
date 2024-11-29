@@ -5,7 +5,7 @@ import './SpotTiles.css'
 
 function SpotTile({ spot }) {
     return (
-      <NavLink to={`/spots/${spot.id}`} className="spot-tile-link">
+      <NavLink to={`/spots/${spot.id}`} state={{spot}} className="spot-tile-link">
         <div className="spot-tile">
           <img src={spot.previewImage || 'default-image-url'} alt={spot.name} className="spot-image" />
           <h3>{spot.name}</h3>

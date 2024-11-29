@@ -8,6 +8,10 @@ import SpotTiles from './components/SpotTiles/SpotTiles';
 import LandingPage from './components/LandingPage/LandingPage';
 import SpotDetails from './components/SpotDetails/SpotDetails';
 import CreateNewSpot from './components/CreateNewSpot/CreateNewSpot';
+import ManagePage from './components/ManagePage/ManagePage';
+import UpdateSpot from './components/UpdateSpot/UpdateSpot';
+
+
 
 function Layout() {
   const dispatch = useDispatch();
@@ -47,6 +51,14 @@ const router = createBrowserRouter([
         path: '/create-spot',
         element: <CreateNewSpot />
       },
+      {
+        path: '/manage-spots',
+        element: <ManagePage />
+      },
+      {
+        path: `/update-spot/:spotId`,
+        element: <UpdateSpot />
+      }
     ]
   }
 ]);

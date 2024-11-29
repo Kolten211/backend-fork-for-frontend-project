@@ -2,6 +2,7 @@ const initialState = [];
 
 const LOAD_REVIEWS = 'LOAD_REVIEWS';
 const ADD_REVIEW = 'ADD_REVIEW';
+const CLEAR_REVIEW = 'CLEAR_REVIEW';
 const UPDATE_REVIEW = 'UPDATE_REVIEW';
 const DELETE_REVIEW = 'DELETE_REVIEW';
 
@@ -13,6 +14,10 @@ const loadReviews = (reviews) => ({
 const addReview = (review) => ({
     type: ADD_REVIEW,
     review
+});
+
+export const clearReviews = () => ({
+    type: CLEAR_REVIEW
 });
 
 const updateReview = (review) => ({
@@ -93,6 +98,9 @@ const reviewsReducer = (state = initialState, action) => {
                 [action.review.id]: action.review,
             };
         }
+        case CLEAR_REVIEW:
+            return initialState
+            
         case DELETE_REVIEW: {
             const newState = {...state};
             delete newState[action.reviewId];
