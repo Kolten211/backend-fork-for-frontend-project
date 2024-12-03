@@ -120,6 +120,24 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
     res.status(200).json({ Reviews: reviewsDeets });
 }); 
 
+router.post('/', requireAuth, async (req, res) => {
+    const { userId, spotId, rating, reviewText } = req.body;
+    
+    try {
+        const newReview = await Review.create({
+            userId,
+            spotId,
+            rating,
+            reviewText
+        });
+
+        res.status(201).json(newReview);
+    } catch (error) {
+        console.error('Error creating review:', error)
+        res.status(500).json({error: 'Error creating review'})
+    }
+});
+
 router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
     const { url } = req.body;
     const { reviewId } = req.params;
