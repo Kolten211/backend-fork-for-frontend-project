@@ -19,60 +19,67 @@ function CreateNewSpot() {
     const [description, setDes] = useState('');
     const [price, setPrice] = useState('');
     const [previewImg, setPreview] = useState('');
-    const [images, setImages] = useState('')
+    const [images, setImages] = useState('');
+    const [errors, setErrors] = useState({});
+
 
     const validateForm = () => {
-        let isValid = true;
+        const newErrors = {};
 
-        const  address = document.getElementById('address').value;     
-        const  city = document.getElementById('city').value;
-        const  state = document.getElementById('state').value;  
-        const  country = document.getElementById('country').value;  
-        const  name = document.getElementById('name').value;  
-        const  description = document.getElementById('description').value;  
-        const  price = document.getElementById('price').value;
-        const previewImg = document.getElementById('previewImg')
-        document.getElementById('priceError').textContent = '';
-        document.getElementById('descriptionError').textContent = '';
-        document.getElementById('previewImgError').textContent = '';
-        
-        if(description.length > 30) {
-            document.getElementById('descriptionError').textContent = 'Description needs 30 or more characters.'
-            isValid = false
+        if (description < 30) {
+            newErrors.description = 'Description needs 30 or more characters.'
+        }
+
+        if (!price) {
+            newErrors.price = 'Price is required'
         }
 
         if(!address) {
-            document.getElementById('addressError').textContent = 'Adress is required.'
-            isValid = false
-        }        
-        if(!city) {
-            document.getElementById('cityError').textContent = 'City is required.'
-            isValid = false
-        }
-        if(!state) {
-            document.getElementById('stateError').textContent = 'State is required'
-            isValid = false
-        }
-        if(!country) {
-            document.getElementById('countryError').textContent = 'Country is required'
-            isValid = false
-        }
-        if(!name) {
-            document.getElementById('nameError').textContent = 'Name is required'
-            isValid = false
+           newErrors.address = 'Address is required.'
+            
         }
 
-        if( !price || isNaN(price) ){
-            document.getElementById('priceError').textContent = 'Price is required'
-            isValid = false
+        if(!city) {
+            newErrors.city = 'City is required.'
+            
+        }
+
+        if(!state) {
+            newErrors.state = 'State is required'
+           
+        }
+
+        if(!country) {
+            newErrors.country = 'Country is required'
+            
+        }
+
+        if(!name) {
+            newErrors.name = 'Name is required'
+            
         }
 
         if(!previewImg) {
-            document.getElementById('previewImg').textContent = 'Preview Image requiered'
-            isValid = false
-        }
+            newErrors.previewImg = 'Preview Image requiered'
+        } 
 
-        return isValid
+        // const  address = document.getElementById('address').value;     
+        // const  city = document.getElementById('city').value;
+        // const  state = document.getElementById('state').value;  
+        // const  country = document.getElementById('country').value;  
+        // const  name = document.getElementById('name').value;  
+        // const  description = document.getElementById('description').value;  
+        // const  price = document.getElementById('price').value;
+        // const previewImg = document.getElementById('previewImg')
+        // document.getElementById('priceError').textContent = '';
+        // document.getElementById('descriptionError').textContent = '';
+        // document.getElementById('previewImgError').textContent = '';
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return false
+        }
+        setErrors(newErrors)
+        return true
     }
 
     // const [errors, setErrors] = useState({})
@@ -87,7 +94,7 @@ function CreateNewSpot() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         
-            if (validateForm) {
+            if (validateForm()) {
                 console.log('START')
                 const spotData = {
                     address,
@@ -129,7 +136,7 @@ return (
         className="create-input"
         placeholder="Country"
       />
-      <div id= "country" className="error"></div>
+      {errors.country && <p className="errors">{errors.country}</p>}
     </label>
     <label className="create-label">Address:
       <input
@@ -141,7 +148,7 @@ return (
         className="create-input"
         placeholder="Address"   
       />
-      <div id="addressError" className="error"></div>
+      {errors.address && <p className="errors">{errors.address}</p>}
     </label>
     <div className="citystate">
         <label className="create-label">City:
@@ -154,8 +161,8 @@ return (
             className="create-input-city"
             placeholder="City"
         />
+        {errors.city && <p className="errors">{errors.city}</p>}
         </label>
-        <div id="cityError" className="error"></div>
         <label className="create-label">State:
         <input
             type="text"
@@ -166,27 +173,10 @@ return (
             className="create-input-state"
             placeholder="State"
         />
-        <div id="stateError" className="error"></div>
+        {errors.state && <p className="errors">{errors.state}</p>}
         </label>
     </div>  
-    {/* <label className="create-label">Latitude:
-      <input
-        type="text"
-        name="lat"
-        value={spotData.lat}
-        onChange={handleChange}
-        className="create-input"
-      />
-    </label>
-    <label className="create-label">Longitude:
-      <input
-        type="text"
-        name="lng"
-        value={spotData.lng}
-        onChange={handleChange}
-        className="create-input"
-      />
-    </label> */}
+
     <div className="description-border">
         <label className="create-label">
             <h4>Describe your place to guests</h4>
@@ -199,7 +189,7 @@ return (
             className="create-input-description"
             placeholder="Please write at least 30 characters"
         />
-        <div id="descripError" className="error"></div>
+        {errors.description && <p className="errors">{errors.description}</p>}
         </label>
     </div>
     <div className="title-border">
@@ -215,7 +205,7 @@ return (
             className="create-input"
             placeholder="Name of your spot"
         />
-       <div id ="nameError" className="error"></div>
+        {errors.name && <p className="errors">{errors.name}</p>}
         </label>
     </div>
     <div className="price-border">
@@ -231,7 +221,7 @@ return (
             className="create-input"
             placeholder="Price per night (USD)"
         />
-        <div id= "priceError" className="error"></div>
+        {errors.price && <p className="errors">{errors.price}</p>}
         </label>
     </div>
     <div className="photos">
@@ -247,8 +237,8 @@ return (
             className="create-input"
             placeholder="Preview Image URL"
         />
+        {errors.previewImg && <p className="errors">{errors.previewImg}</p>}
         </label>
-        <div id= "previewImgError" className="error"></div>
         <label className="create-label">
             <input
             type="text"

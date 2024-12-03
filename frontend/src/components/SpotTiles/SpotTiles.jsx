@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaStar } from "react-icons/fa";
+import { fetchSpots } from '../../store/spotActions';
 import './SpotTiles.css'
+import { useDispatch, useSelector } from 'react-redux';
 
 function SpotTile({ spot }) {
     return (
@@ -20,21 +22,19 @@ function SpotTile({ spot }) {
   }
 
 function SpotTiles() {
-    const [spotList, setSpotList] = useState([]);
-
+    const dispatch = useDispatch()
+   
+    
     useEffect(() => {
-        fetch('/api/spots')
-         .then(response => response.json())
-         .then(data =>  {
-            console.log('Fetched spots:', data.Spots);
-            setSpotList(data.Spots);
-          })
-         .catch(error => console.error('Error Fetching Spots', error))
+      dispatch(fetchSpots())
+
     }, []);
+    
+    const spots = useSelector(state => state.spot)
 
     return (
         <div className='spot-tiles-container'>
-            {spotList.map(spot => (
+            {spots.map(spot => (
                 <SpotTile key={spot.id} spot={spot} />
             ))}
         </div>

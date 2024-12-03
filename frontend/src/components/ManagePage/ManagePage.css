@@ -1,0 +1,8 @@
+.landing-container{
+    display:flex;
+    flex-direction: row;
+    max-width: 100%;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}

@@ -9,11 +9,13 @@ import { fetchSpotDetails } from '../../store/spotActions';
 import { clearSpotDetails } from '../../store/spotActions';
 import { clearReviews } from '../../store/review';
 import { fetchReviews } from '../../store/review';
+import CreateReview from '../RatingandReviews/ReviewModal';
 
 function SpotDetails() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
-  
+  const sessionUser = useSelector(state => state.session.user);
+
   useEffect(() => {
     dispatch(clearSpotDetails())
     dispatch(clearReviews())
@@ -31,7 +33,17 @@ function SpotDetails() {
 
   console.log('REVIEWS!!!', reviews);
 
-  const averageRating = (reviews.reduce((sum, review) => sum + review.stars, 0 ) / reviews.length).toFixed(1) 
+  const sortedReviews = reviews.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+  console.log('Sorted reviews', sortedReviews)
+
+  // const monthName = sortedReviews.map(review => ({
+  //   ...review,
+  //   namedDate: new Date(review.createdAt.slice(0,10)).toLocaleString('en-US', {month: 'Long', year: 'numeric'})
+  // }))
+
+  const averageRating = (reviews.reduce((sum, review) => sum + review.stars, 0 ) / reviews.length).toFixed(1);
+
 //reviews.length > 0 ? ( :
   //'NEW'
   if (!spot) return <div>Loading...</div>; // see if everything is redering correctly
@@ -63,12 +75,19 @@ function SpotDetails() {
         />
       </div>
       <div className="reviews-summary">
+        <h2>Reviews/Ratings</h2>
+        {!reviews || reviews.User !== sessionUser ? <OpenModalButton
+          className='createReview'
+          buttonText='Post Your Review'
+          modalComponent={<CreateReview spot={spot}/>}
+        /> : <></>}
         { reviews.length ? <h2> <FaStar /> {averageRating} · {spot.numReviews}</h2> :  <h2><FaStar />NEW</h2>}
         <ul className="reviews-list">
-          {reviews.map((review) => (
+          {sortedReviews.map((review) => (
             <li key={review.id}>
+              <p>{review.User.firstName}</p>
+              <p>{review.createdAt.slice(0,10)}</p>
               <p>{review.review}</p>
-              <p><FaStar /> {review.stars}</p>
             </li>
           ))}
         </ul>

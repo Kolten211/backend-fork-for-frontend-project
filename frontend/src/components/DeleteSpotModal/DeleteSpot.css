@@ -1,0 +1,7 @@
+.grayButton {
+    background: darkgray;
+}
+
+.grayButton :hover{
+    background: darkgray
+}

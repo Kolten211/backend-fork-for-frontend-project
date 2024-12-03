@@ -1,0 +1,30 @@
+.star-rating {
+    display: flex
+}
+
+.star {
+    font-size: 24px;
+    cursor: pointer;
+    color: #ccc
+}
+
+.star.filled {
+    color: gold;
+}
+
+.reviewArea {
+    width: 90%;
+    height: 70px;
+    padding: 10px;
+    margin-top: 5px;
+    border: 2px solid #000;
+    border-radius: 5px;
+    resize: none;
+}
+.newReview {
+    width: 300px;
+    height: 300px;
+    /* height: 70px;
+    padding: 10px;
+    margin-top: 5px; */
+}
