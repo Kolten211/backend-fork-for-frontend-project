@@ -18,13 +18,12 @@ if (import.meta.env.MODE !== 'production') {
   window.sessionActions = sessionActions;
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-    
-      <Provider store={store}>
-        <ModalProvider>
-          <App />
-          <Modal />
-        </ModalProvider>
-      </Provider>
+ReactDOM.createRoot(document.getElementById('root')).render(  
+  <Provider store={store}>
+    <ModalProvider>
+      <App />
+      <Modal />
+    </ModalProvider>
+  </Provider>
     
 );

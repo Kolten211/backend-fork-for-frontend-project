@@ -45,7 +45,7 @@ function SpotDetails() {
 
   
 
-  if (!spot) return <div>Loading...</div>; // see if everything is redering correctly
+  if (!spot || !spot.numReviews) return <div>Loading...</div>; // see if everything is redering correctly
 
   return (
     <div className="spot-details">
