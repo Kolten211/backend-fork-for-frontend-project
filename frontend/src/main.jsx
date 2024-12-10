@@ -19,10 +19,12 @@ if (import.meta.env.MODE !== 'production') {
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <ModalProvider>
+    
       <Provider store={store}>
-        <App />
-        <Modal />
+        <ModalProvider>
+          <App />
+          <Modal />
+        </ModalProvider>
       </Provider>
-    </ModalProvider>
+    
 );

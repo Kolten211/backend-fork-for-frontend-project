@@ -46,21 +46,24 @@ function ProfileButton({ user }) {
 
   return (
     <div>
-      <button onClick={toggleMenu} className='profile'>
-        <GiHamburgerMenu /><FaUserCircle />
-      </button>
+      {user ? <button onClick={toggleMenu} className='profile'>
+         <GiHamburgerMenu /><FaUserCircle />
+      </button> : <button onClick={toggleMenu} className='profile'>
+         <GiHamburgerMenu />
+      </button> }
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <div className='options-menu'>
-            <li>Hello, {user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
-            <li>{user.email}</li>
-            <Link to='/manage-spots' className='manage-spots'>
-              <button className='manage-button'>Manage Spots</button>
-            </Link>
-            <li>
-              <button onClick={logout}>Log Out</button>
-            </li>
+              <li>Hello, {user.username}</li>
+              <li>{user.firstName} {user.lastName}</li>
+              <li>{user.email}</li>
+              <div className='items'>
+                <Link onClick={toggleMenu} to='/manage-spots' className='manage-spots'>Manage Spots</Link>
+                <Link onClick={toggleMenu} to='manage-reviews' className='manage-reviews'>Manage Reviews</Link>
+              </div>
+              <li>
+                <button onClick={logout}>Log Out</button>
+              </li>
           </div>
         ) : (
           <>

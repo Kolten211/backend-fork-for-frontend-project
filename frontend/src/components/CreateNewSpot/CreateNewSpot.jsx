@@ -107,10 +107,10 @@ function CreateNewSpot() {
                     previewImg,
                     images: images.split(',').map(url => url.trim())
                 }
-                console.log('Next step!!')
+               
                 console.log('===>', spotData)
                 const newSpot = await dispatch(createSpot(spotData));
-                console.log('Dispatch??')
+              
                 console.log("Submitted",newSpot)
                 navigate(`/spots/${newSpot.id}`)
 

@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 const initialState = [];
 
 const LOAD_REVIEWS = 'LOAD_REVIEWS';
@@ -30,9 +32,9 @@ const deleteReview = (reviewId) => ({
     reviewId
 });
 
-
 export const fetchReviews = (spotId) => async (dispatch) => {
     const response = await fetch(`/api/spots/${spotId}/reviews`);
+    console.log()
     if (response.ok) {
         const reviews = await response.json();
         console.log('This is the reviews', reviews)
@@ -40,8 +42,17 @@ export const fetchReviews = (spotId) => async (dispatch) => {
     }
 };
 
+export const fetchUserReviews = () => async (dispatch) => {
+    const response = await csrfFetch('api/reviews/current');
+    if (response.ok) {
+        const data = await response.json();
+        console.log('Response', data)
+        dispatch(loadReviews(data))
+    }
+}
 export const createReview = (review) => async (dispatch) => {
-    const response = await fetch('/api/reviews', {
+    console.log('Is there a spot?',review)
+    const response = await csrfFetch(`/api/spots/${review.spotId}/reviews`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -55,7 +66,7 @@ export const createReview = (review) => async (dispatch) => {
 };
 
 export const editReview = (review) => async (dispatch) => {
-    const response = await fetch(`/api/reviews/${review.id}`, {
+    const response = await csrfFetch(`/api/reviews/${review.id}`, {
         method:'PUT',
         headers: {
             'Content-Type': 'application/json', 
@@ -69,7 +80,7 @@ export const editReview = (review) => async (dispatch) => {
 };
 
 export const removeReview = (reviewId) => async (dispatch) => {
-    const response = await fetch(`/api/reviews/${reviewId}`, {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method:'DELETE',
     });
     if(response.ok) {
@@ -81,17 +92,13 @@ const reviewsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_REVIEWS: {
             
-            const reviewsArray = action.reviews.Reviews;
-            console.log('action.reviews:', reviewsArray);
-            if (Array.isArray(reviewsArray))
-            return [...reviewsArray];
+            return [...action.reviews.Reviews];
         }
-        case ADD_REVIEW: {
-            return {
-                ...state,
-                [action.review.id]: action.review,
-            }
-        }
+        
+        case ADD_REVIEW: 
+            return [...state, action.review]
+            
+        
         case UPDATE_REVIEW:{
             return {
                 ...state,

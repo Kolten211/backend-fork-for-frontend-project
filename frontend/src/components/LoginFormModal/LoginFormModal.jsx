@@ -14,6 +14,8 @@ function LoginFormModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors({});
@@ -48,7 +50,6 @@ function LoginFormModal() {
             type="text"
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
-            required
           />
         </label>
         <label>
@@ -57,7 +58,6 @@ function LoginFormModal() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
         </label>
         {errors.credential && (

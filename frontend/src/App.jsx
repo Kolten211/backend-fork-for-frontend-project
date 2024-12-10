@@ -10,6 +10,9 @@ import SpotDetails from './components/SpotDetails/SpotDetails';
 import CreateNewSpot from './components/CreateNewSpot/CreateNewSpot';
 import ManagePage from './components/ManagePage/ManagePage';
 import UpdateSpot from './components/UpdateSpot/UpdateSpot';
+import ManageReviews from './components/ManageReviews/ManageReviews';
+import DeleteReview from './components/DeleteReview/DeleteReviewModal';
+
 
 
 
@@ -54,6 +57,13 @@ const router = createBrowserRouter([
       {
         path: '/manage-spots',
         element: <ManagePage />
+      },
+      {
+        path: '/manage-reviews',
+        element: <ManageReviews />
+      },
+      {
+        element: <DeleteReview />
       },
       {
         path: `/update-spot/:spotId`,

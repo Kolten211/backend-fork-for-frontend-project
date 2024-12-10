@@ -8,7 +8,14 @@
 }
 
 .header{
-  border-bottom: 1px solid #000;
+  border-bottom: 2px solid #C7383C;
+}
+
+.header ul{
+  border: 2px solid #000;
+  border-radius: 10px;
+  border-color: #C7383C;
+  padding: 25px;
 }
 
 ul {
@@ -55,9 +62,9 @@ ul {
 }
 
 .profile-dropdown {
-  /* display: flex; */
-  /* flex-direction: row;  */
-  /* position: absolute; */
+  /* display: flex;
+  flex-direction: row;  */
+  /* position: relative; */
   right: 0;
   top: 100%;
   background-color: #ffffff;
@@ -65,13 +72,13 @@ ul {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
   padding: 10px;
-  width: 300px;
-  height: 300px;
-  z-index: 1000;
+  width: 150px;
+  height: 150px;
+  z-index: 999;
 }
   
 .profile-dropdown li {
-  padding: 10px 0;
+  padding: 5px 0;
   /* border-bottom: 1px solid #ddd; */
   text-align: left;
 }
@@ -100,21 +107,32 @@ ul {
 .options-menu{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 95%
+  font-size: 12px;
+  align-items: stretch;
 }
 
-.manage-spots{
+.items{
+  display: flex;
   border-bottom: 2px solid #000;
   border-top: 2px solid #000;
-  width: 95%;
-  
+  gap: 5px
+}
+.manage-spots{
+  text-decoration: none;
+  color: #000;
 }
 
-.manage-button{
-  background-color: transparent;
+.manage-spots:hover{
+  background-color: #C7383C;
+}
+
+.manage-reviews{
+  text-decoration: none;
   color: #000;
-  width: 260px;
+}
+
+.manage-reviews:hover{
+  background-color: #C7383C;
 }
 
 .hyper{

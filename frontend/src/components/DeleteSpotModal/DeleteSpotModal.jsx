@@ -10,6 +10,7 @@ function DeleteSpot({ spot }) {
 
     const handleDelete = () => {
         dispatch(removeSpot(spot.id))
+        closeModal()
     };
 
     const handleKeep = () => {
@@ -17,9 +18,13 @@ function DeleteSpot({ spot }) {
     }
 
     return (
-        <div>
-            <button onClick={handleDelete}>YES(Delete Spot)</button>
-            <button onClick={handleKeep} className="grayButton">No(Keep Spot)</button>
+        <div className="delete-modal">
+            <h2>Confirm Delete</h2>
+            <p>Are you sure you want to remove this spot from the listing?</p>
+            <div className="spot-buttons">
+                <button onClick={handleDelete}>YES(Delete Spot)</button>
+                <button onClick={handleKeep} className="grayButton">No(Keep Spot)</button>
+            </div>
         </div>
     )
 }

@@ -6,6 +6,7 @@ import './SpotTiles.css'
 import { useDispatch, useSelector } from 'react-redux';
 
 function SpotTile({ spot }) {
+     const avgRating = spot.avgStarRating
     return (
       <NavLink to={`/spots/${spot.id}`} state={{spot}} className="spot-tile-link">
         <div className="spot-tile">
@@ -13,7 +14,7 @@ function SpotTile({ spot }) {
           <h3>{spot.name}</h3>
           <div className='spot-info'>
             <p>{spot.city}, {spot.state}</p>
-            <p className='spot-rating'><FaStar />{spot.avgStarRating.toFixed(1)}</p>
+            <p className='spot-rating'><FaStar />{avgRating}.0</p>
           </div>
           <p>${spot.price}night</p>
         </div>

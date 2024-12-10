@@ -1,13 +1,13 @@
 import { useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { fetchUserSpots } from "../../store/spotActions";
 import { FaStar } from "react-icons/fa"
 // import { removeSpot } from "../../store/spotActions";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import DeleteSpot from "../DeleteSpotModal/DeleteSpotModal";
 import './ManagePage.css'
-import CreateNewSpot from "../CreateNewSpot/CreateNewSpot";
+// import CreateNewSpot from "../CreateNewSpot/CreateNewSpot";
 
 function SpotTile({ spot }) {
     console.log('Spot info', spot)
@@ -22,7 +22,7 @@ function SpotTile({ spot }) {
         navigate(`/update-spot/${spot.id}`, { state: spot } )
     };
 
-    const average = spot.avgRating.toFixed(1);
+    const average = spot.avgRating ? spot.avgRating.toFixed(1) : 'NEW'
 
     return (
     <div>
@@ -69,20 +69,15 @@ const ManagePage = () => {
 
 
     return (
-        <div>
+        <div className="managepage">
             <h1>Manage Your Spots</h1>
-            {!spots ? <OpenModalButton
-             buttonText='Create a Spot'
-             modalComponent={<CreateNewSpot />}
-            /> : spots && spots.length > 0 ? (
+            {spots.length === 0 ? <div><Link to='/create-spot' className='create-manage'>Create a New Spot</Link> <p>You don&apos;t have any spots yet.</p></div> : spots && spots.length > 0 ? (
                 <ul className="landing-container">
                     {spots.map(spot => (
                        <SpotTile key={spot.id} spot={spot} />
                     ))}
                 </ul>
-            ) : (
-                <p>You don&apos;t have any spots yet.</p>
-            )}
+            ) : <></>}
         </div>
     )
 }

@@ -2,6 +2,14 @@
     background: darkgray;
 }
 
-.grayButton :hover{
-    background: darkgray
+.grayButton:hover{
+    background: #C7383C
+}
+
+.delete-modal{
+    border-radius: 10px;
+}
+.spot-buttons{
+    display: flex;
+    gap: 5px
 }

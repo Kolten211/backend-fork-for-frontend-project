@@ -16,7 +16,7 @@ function OpenModalButton({
     if (typeof onButtonClick === "function") onButtonClick();
   };
 
-  return <button className='custom-button'onClick={onClick}>{buttonText}</button>;
+  return <button className='custom-button' type='button' onClick={onClick}>{buttonText}</button>;
 }
 // const Greeting = () => {
 //     return (

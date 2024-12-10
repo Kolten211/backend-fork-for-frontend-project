@@ -10,6 +10,7 @@ import { clearSpotDetails } from '../../store/spotActions';
 import { clearReviews } from '../../store/review';
 import { fetchReviews } from '../../store/review';
 import CreateReview from '../RatingandReviews/ReviewModal';
+import DeleteReview from '../DeleteReview/DeleteReviewModal';
 
 function SpotDetails() {
   const { spotId } = useParams();
@@ -19,11 +20,10 @@ function SpotDetails() {
   useEffect(() => {
     dispatch(clearSpotDetails())
     dispatch(clearReviews())
-    const fetchData = async () => {
-      await dispatch(fetchSpotDetails(spotId));
-      await dispatch(fetchReviews(spotId));
-    }
-    fetchData()
+    
+    dispatch(fetchSpotDetails(spotId));
+    dispatch(fetchReviews(spotId));
+   
   }, []);
 
   const spotdetails = useSelector(state => state.spot);
@@ -31,21 +31,20 @@ function SpotDetails() {
 
   const reviews = useSelector(state => state.review);
 
-  console.log('REVIEWS!!!', reviews);
+  console.log("sessionUser",sessionUser)
 
-  const sortedReviews = reviews.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+  // const sortedReviews =  reviews.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-  console.log('Sorted reviews', sortedReviews)
+ 
 
-  // const monthName = sortedReviews.map(review => ({
-  //   ...review,
-  //   namedDate: new Date(review.createdAt.slice(0,10)).toLocaleString('en-US', {month: 'Long', year: 'numeric'})
-  // }))
+  const userReview = reviews.find(review => review.userId === sessionUser?.id && review.spotId == spot?.id)
+  
+  
 
   const averageRating = (reviews.reduce((sum, review) => sum + review.stars, 0 ) / reviews.length).toFixed(1);
 
-//reviews.length > 0 ? ( :
-  //'NEW'
+  
+
   if (!spot) return <div>Loading...</div>; // see if everything is redering correctly
 
   return (
@@ -64,8 +63,8 @@ function SpotDetails() {
           </>
         )}
       </div>
-      <p>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</p>
-      <p>{spot.description}</p>
+      {spot.Owner ? <p>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</p> : <p>loading...</p>}
+      <p className='divider'>{spot.description}</p>
       <div className="callout-box">
         {reviews.length === 1 ? <p>${spot.price} night <FaStar /> {averageRating} {spot.numReviews} : Review</p> : reviews.length === 0 ? <p>${spot.price} night <FaStar /> NEW  </p> : <p>${spot.price} night <FaStar /> {averageRating} {spot.numReviews} : Reviews</p> }
         <OpenModalButton
@@ -75,21 +74,31 @@ function SpotDetails() {
         />
       </div>
       <div className="reviews-summary">
-        <h2>Reviews/Ratings</h2>
-        {!reviews || reviews.User !== sessionUser ? <OpenModalButton
+        { reviews.length ? <div className='reviews-border'><h2> <FaStar /> {averageRating} · {spot.numReviews}</h2> {!userReview && sessionUser  ? <OpenModalButton
           className='createReview'
           buttonText='Post Your Review'
           modalComponent={<CreateReview spot={spot}/>}
-        /> : <></>}
-        { reviews.length ? <h2> <FaStar /> {averageRating} · {spot.numReviews}</h2> :  <h2><FaStar />NEW</h2>}
+        /> : !sessionUser ? <></> : <></>}</div> : <div className='reviews-border'> <h2><FaStar />NEW</h2> {!userReview && sessionUser  ? <OpenModalButton
+          className='createReview'
+          buttonText='Post Your Review'
+          modalComponent={<CreateReview spot={spot}/>}
+        /> : spot.Owner ? <></> : <></>} <h4>Be the first to post a review!</h4></div> }
+        
         <ul className="reviews-list">
-          {sortedReviews.map((review) => (
+          { reviews ? reviews.map((review) => (
             <li key={review.id}>
               <p>{review.User.firstName}</p>
-              <p>{review.createdAt.slice(0,10)}</p>
+              <p>{review.createdAt.slice(0,10).toLocaleString("en-US", {month: "long", year: "numeric"})}</p>
               <p>{review.review}</p>
+              <div>
+              {review.User.id == sessionUser.id ? <OpenModalButton 
+              className=''
+              buttonText='Delete'
+              modalComponent={<DeleteReview review={review}/>}/>
+               : <></>}
+              </div>
             </li>
-          ))}
+          )) : <>Loading</>}
         </ul>
       </div>
     </div>

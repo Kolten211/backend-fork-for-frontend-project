@@ -7,7 +7,7 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
-
+  console.log(sessionUser)
   return (
     <div className='header'>
       <ul>
@@ -20,7 +20,7 @@ function Navigation({ isLoaded }) {
         </li>
         </div>
         <div className='options'>
-          <Link to='/create-spot' className='hyper'>Create a New Spot</Link>
+          {sessionUser ? <Link to='/create-spot' className='hyper'>Create a New Spot</Link> : <></>}
         {isLoaded && (
           <li>
           <ProfileButton user={sessionUser} />
