@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FaStar } from "react-icons/fa";
 import ReserveFormModal from '../ReserveFormModal/ReserveFormModal';
 import './SpotDetails.css';
@@ -15,6 +15,7 @@ import DeleteReview from '../DeleteReview/DeleteReviewModal';
 function SpotDetails() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const sessionUser = useSelector(state => state.session.user);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ function SpotDetails() {
     dispatch(fetchSpotDetails(spotId));
     dispatch(fetchReviews(spotId));
    
-  }, []);
+  }, [dispatch]);
 
   const spotdetails = useSelector(state => state.spot);
   const spot = spotdetails[0];
@@ -37,15 +38,15 @@ function SpotDetails() {
 
  
 
-  const userReview = reviews.find(review => review.userId === sessionUser?.id && review.spotId == spot?.id)
+  const userReview = reviews?.find(review => review.userId === sessionUser?.id && review.spotId == spot?.id)
   
   
 
-  const averageRating = (reviews.reduce((sum, review) => sum + review.stars, 0 ) / reviews.length).toFixed(1);
+  const averageRating = (reviews?.reduce((sum, review) => sum + review.stars, 0 ) / reviews.length).toFixed(1);
 
   
-
-  if (!spot || !spot.numReviews) return <div>Loading...</div>; // see if everything is redering correctly
+  // 
+  if (!spot ) return <div>Loading...</div>; // see if everything is redering correctly
 
   return (
     <div className="spot-details">
@@ -74,27 +75,31 @@ function SpotDetails() {
         />
       </div>
       <div className="reviews-summary">
-        { reviews.length ? <div className='reviews-border'><h2> <FaStar /> {averageRating} · {spot.numReviews}</h2> {!userReview && sessionUser  ? <OpenModalButton
+        { reviews.length ? 
+        
+        <div className='reviews-border'><h2> <FaStar /> {averageRating} · {spot.numReviews}</h2> {!userReview && sessionUser  ? <OpenModalButton
           className='createReview'
           buttonText='Post Your Review'
-          modalComponent={<CreateReview spot={spot}/>}
-        /> : !sessionUser ? <></> : <></>}</div> : <div className='reviews-border'> <h2><FaStar />NEW</h2> {!userReview && sessionUser  ? <OpenModalButton
+          modalComponent={<CreateReview spot={spot} navigate={navigate}/>}
+        /> : !sessionUser || (sessionUser.id == spot.ownerId)? <></> : <></>}</div> : 
+        
+        <div className='reviews-border'> <h2><FaStar />NEW</h2> {!userReview && sessionUser  ? <OpenModalButton
           className='createReview'
           buttonText='Post Your Review'
-          modalComponent={<CreateReview spot={spot}/>}
-        /> : spot.Owner ? <></> : <></>} <h4>Be the first to post a review!</h4></div> }
+          modalComponent={<CreateReview spot={spot} navigate={navigate}/>}
+        /> : <h4>Be the first to post a review!</h4>}</div> }
         
         <ul className="reviews-list">
           { reviews ? reviews.map((review) => (
             <li key={review.id}>
-              <p>{review.User.firstName}</p>
+              <p>{review?.User?.firstName}</p>
               <p>{review.createdAt.slice(0,10).toLocaleString("en-US", {month: "long", year: "numeric"})}</p>
               <p>{review.review}</p>
               <div>
-              {review.User.id == sessionUser.id ? <OpenModalButton 
+              {review?.User?.id == sessionUser?.id ? <OpenModalButton 
               className=''
               buttonText='Delete'
-              modalComponent={<DeleteReview review={review}/>}/>
+              modalComponent={<DeleteReview review={review} navigate={navigate}/>}/>
                : <></>}
               </div>
             </li>

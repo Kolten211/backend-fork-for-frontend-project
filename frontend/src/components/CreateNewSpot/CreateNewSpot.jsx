@@ -63,17 +63,7 @@ function CreateNewSpot() {
             newErrors.previewImg = 'Preview Image requiered'
         } 
 
-        // const  address = document.getElementById('address').value;     
-        // const  city = document.getElementById('city').value;
-        // const  state = document.getElementById('state').value;  
-        // const  country = document.getElementById('country').value;  
-        // const  name = document.getElementById('name').value;  
-        // const  description = document.getElementById('description').value;  
-        // const  price = document.getElementById('price').value;
-        // const previewImg = document.getElementById('previewImg')
-        // document.getElementById('priceError').textContent = '';
-        // document.getElementById('descriptionError').textContent = '';
-        // document.getElementById('previewImgError').textContent = '';
+
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
             return false

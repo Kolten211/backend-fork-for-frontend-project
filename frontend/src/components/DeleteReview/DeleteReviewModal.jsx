@@ -5,7 +5,7 @@ import { removeReview } from "../../store/review";
 
 
 
-function DeleteReview({review}){
+function DeleteReview({review, navigate}){
     console.log('Whats your info',review)
     const dispatch = useDispatch();
     const { closeModal } = useModal();
@@ -14,6 +14,7 @@ function DeleteReview({review}){
     const handleDelete = () => {
         dispatch(removeReview(review.id))
         closeModal()
+        navigate(`/spots/${review.spotId}`)
     }
 
 

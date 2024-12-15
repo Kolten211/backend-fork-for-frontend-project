@@ -6,13 +6,13 @@ import { useState } from "react";
 import './ReviewModal.css'
 // import { useNavigate } from "react-router-dom";
 
-function CreateReview({spot}) {
+function CreateReview({spot, navigate }) {
     const dispatch = useDispatch();
-    // const navigate = useNavigate()
+
     const [review, setReviewText] = useState('')
     const [stars, setRating] = useState(0);
     const [errors, setErrors] = useState({});
-    const { closeModal } = useModal;
+    const { closeModal } = useModal();
 
     console.log('what is going on', spot);
     const spotId = spot.id
@@ -40,8 +40,8 @@ function CreateReview({spot}) {
         stars
     };
 
-    const handleReview = async () => {
-        // event.preventDefault();
+    const handleReview = async (event) => {
+        event.preventDefault();
 
         if (validSubmit()) {
             const reviewData = {
@@ -50,11 +50,11 @@ function CreateReview({spot}) {
                 stars
             }
             
-            await dispatch(createReview(reviewData));
+            const newReview = await dispatch(createReview(reviewData));
            
-            closeModal();
+            closeModal()
 
-            // navigate(`/spots/${newReview.spotId}`)
+            navigate(`/spots/${newReview.spotId}`)
 
             
         }
