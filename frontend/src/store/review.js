@@ -108,11 +108,11 @@ const reviewsReducer = (state = initialState, action) => {
         case CLEAR_REVIEW:
             return initialState
             
-        case DELETE_REVIEW: {
+        case DELETE_REVIEW: 
             return state.filter(review => review.id !== action.reviewId)
-        }
-            default:
-                return state
+        
+        default:
+            return state
     }
 }
 
