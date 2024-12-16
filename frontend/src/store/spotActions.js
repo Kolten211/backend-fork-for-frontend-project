@@ -112,6 +112,7 @@ export const removeSpot = (spotId) => async (dispatch) => {
 };
 
 
+
 // REDUCER --------------------------------------------------------
 
 const spotReducer = ( state = initialState, action) => {
